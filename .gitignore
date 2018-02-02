@@ -1,5 +1,4 @@
 # Haskell
-
 dist
 dist-*
 cabal-dev
