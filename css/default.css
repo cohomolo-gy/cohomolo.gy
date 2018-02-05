@@ -10,25 +10,26 @@ body {
 header {
     text-align: center;
     border-bottom: 2px solid black;
-    margin-bottom: 30px;
-    padding: 12px 0px 12px 0px
+    margin-bottom: 12px;
+    padding: 24px 0px 12px 0px
 }
 
 header a {
     color: black;
     font-size: 36px;
     font-weight: bold;
+    text-transform: uppercase;
     text-decoration: none
 }
 
 nav {
-    text-align: right
+    margin: 0 auto;
+    text-align: center
 }
 
 nav a {
     color: black;
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 16px;
     text-decoration: none;
     text-transform: uppercase
 }
