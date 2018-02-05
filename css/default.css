@@ -11,13 +11,11 @@ header {
     text-align: center;
     border-bottom: 2px solid black;
     margin-bottom: 12px;
-    padding: 24px 0px 12px 0px
+    padding: 32px 0px 6px 0px
 }
 
 header a {
     color: black;
-    font-size: 36px;
-    font-weight: bold;
     text-transform: uppercase;
     text-decoration: none
 }
@@ -61,8 +59,7 @@ article .header {
 .logo a {
     text-align: center;
     color: black;
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 30px;
     text-decoration: none
 }
 
