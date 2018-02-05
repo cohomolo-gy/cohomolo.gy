@@ -23,5 +23,7 @@ cabal.project.local~
 .ghc.environment.*
 
 # Hakyll
+_site
 _cache
 \#*
+
