@@ -58,8 +58,8 @@ article .header {
 }
 
 .logo a {
+    text-align: center;
     color: black;
-    float: left;
     font-size: 18px;
     font-weight: bold;
     text-decoration: none
