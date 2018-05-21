@@ -15,10 +15,15 @@ pipeline:
     acl:
       '/**/*': public-read
     secrets: [ aws_access_key_id, aws_secret_access_key ]
+    when:
+      event: push
+      branch: master
 
   webhook:
     image: ncatelli/hugo_builder:v0.29
     commands:
       - 'curl -kH "Content-type: application/json" -H "Accept: application/json" -d "{\"urls\": [{\"url\": \"http://www.cohomolo.gy/*\"}]}" "$WEBHOOK_URLS" -u "$WEBHOOK_USERNAME:$WEBHOOK_PASSWORD" -s'
     secrets: [ webhook_username, webhook_password, webhook_urls ]
-
+    when:
+      event: push
+      branch: master
