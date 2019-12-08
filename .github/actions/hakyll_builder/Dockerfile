@@ -1,15 +1,16 @@
-FROM alpine:3.7
+FROM debian:10
 
 LABEL maintainer="Nate Catelli <ncatelli@packetfire.org>"
 LABEL description="A container with hakyll."
 LABEL "com.github.actions.name"="Hakyll Actions"
 LABEL "com.github.actions.description"="The hakyll build environment for the cohomolo.gy site."
 
-RUN apk add --no-cache ghc cabal gcc libc-dev zlib-dev && \ 
-    cabal update && \
-    cabal install hakyll
+RUN apt-get update && \ 
+    apt-get install -y cabal-install zlib1g-dev gcc libc-dev && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 ADD entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 
-CMD ["/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
