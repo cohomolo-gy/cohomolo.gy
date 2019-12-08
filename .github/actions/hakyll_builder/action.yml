@@ -1,0 +1,13 @@
+# action.yml
+name: 'Hakyll Builder'
+description: 'Renders a static site using hakyll.'
+inputs:
+  hakyll_command:
+    description: The hakyll command to run.
+    required: true
+    default: 'exec site rebuild'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.hakyll_command }}

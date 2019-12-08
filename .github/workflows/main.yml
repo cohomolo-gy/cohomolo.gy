@@ -1,0 +1,26 @@
+name: Render and publish static site
+on: [push]
+jobs:
+  build:
+    name: render site with hakyll
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Site Template
+        uses: actions/checkout@v1
+      - name: Render Hakyll
+        uses: ./.github/actions/hakyll_builder
+      - name: Copy Public Directory to S3
+        if: github.ref == 'refs/heads/master'
+        uses: jakejarvis/s3-sync-action@v0.5.0
+        with:
+          args: --acl public-read --follow-symlinks --delete
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
+          AWS_REGION: 'us-east-1'
+          SOURCE_DIR: 'public'
+      - name: Issue Invalidation To CDN
+        if: github.ref == 'refs/heads/master'
+        run: |
+          curl -kH "Content-type: application/json" -H "Accept: application/json" -d "{\"urls\": [{\"url\": \"http://www.cohomolo.gy/*\"}]}" ${{ secrets.WEBHOOK_ENDPOINT }} -u "${{ secrets.WEBHOOK_USERNAME }}:${{ secrets.WEBHOOK_PASSWORD }}" -s
